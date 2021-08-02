@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { keyframes } from 'styled-components'
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
@@ -50,7 +51,7 @@ function Card() {
       <CardDealerName>Dealer</CardDealerName>
       <CardDealer src={card[0]?.cardImage} alt='Dealer'/>
 
-      {isWinner ? (<CardWinner>You Win!</CardWinner>) : (isLoser ? (<CardLoser>You lose!</CardLoser>) : (<CardTie>It's a tie!</CardTie>))}
+      {isWinner ? (<CardWinner>YOU WIN!</CardWinner>) : (isLoser ? (<CardLoser>YOU LOSE!</CardLoser>) : (<CardTie>DRAW</CardTie>))}
 
       <CardPlayer src={card[1]?.cardImage} alt='Player'/>
       <CardPlayerName>Player</CardPlayerName>
@@ -80,26 +81,32 @@ const CardPlayer = styled.img``;
 
 const CardPlayerName = styled.h3``;
 
+const Result = keyframes`
+  100% { transform: scale(6.00); }
+`;
+
 const CardWinner = styled.h1`
   color: green;
-
-  box-shadow: 5px 5px 5px 1px rgba(0, 0, 0, .3);
   transition: all 250ms cubic-bezier(0, 0, 0, 0) 0s;
-
-  &:hover {
-
-  box-shadow: rgba(0, 0, 0, .8) 0px 40px 58px -16px,
-  rgba(0, 0, 0, .72) 0px 30px 22px -10px;
-  transform: scale(5.00);
-}
+  animation-name: ${Result}; 
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 `;
 
 const CardLoser = styled.h1`
   color: red;
+  transition: all 250ms cubic-bezier(0, 0, 0, 0) 0s;
+  animation-name: ${Result}; 
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 `;
 
 const CardTie = styled.h1`
   color: grey;
+  transition: all 250ms cubic-bezier(0, 0, 0, 0) 0s;
+  animation-name: ${Result}; 
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 `;
 
 const CardButtonContainer = styled.div`
