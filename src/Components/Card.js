@@ -45,19 +45,22 @@ function Card() {
 
   const isLoser = CARD_VALUE_MAP[card[0]?.cardValue] > CARD_VALUE_MAP[card[1]?.cardValue]
 
+console.log(card)
 
   return (
     <CardContainer>
-      <CardDealerName>Dealer</CardDealerName>
-      <CardDealer src={card[0]?.cardImage} alt='Dealer'/>
+      {card[0] ? '' : <h1>Are you ready to play?</h1>}
 
-      {isWinner ? (<CardWinner>YOU WIN!</CardWinner>) : (isLoser ? (<CardLoser>YOU LOSE!</CardLoser>) : (<CardTie>DRAW</CardTie>))}
+      {card[0] ? <CardDealerName>Dealer</CardDealerName> : '' }
+      {card[0] ? <CardDealer src={card[0]?.cardImage} alt='Dealer'/> : '' }
 
-      <CardPlayer src={card[1]?.cardImage} alt='Player'/>
-      <CardPlayerName>Player</CardPlayerName>
+      {isWinner ? (<CardWinner>YOU WIN!</CardWinner>) : (isLoser ? (<CardLoser>YOU LOSE!</CardLoser>) : (card[0] ? (<CardTie>DRAW</CardTie>) : ''))}
+
+      {card[1] ? <CardPlayer src={card[1]?.cardImage} alt='Player'/> : '' }
+      {card[1] ? <CardPlayerName>Player</CardPlayerName> : '' }
 
       <CardButtonContainer>
-        <CardButton variant="contained" color="primary" onClick={startGame}>Primary</CardButton>
+        <CardButton variant="contained" color="primary" onClick={startGame}>Let's Go!</CardButton>
       </CardButtonContainer>
     </CardContainer>
   );
@@ -71,6 +74,14 @@ const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  /* background-size: cover;
+  background-image: url('https://images.pexels.com/photos/7471612/pexels-photo-7471612.jpeg?cs=srgb&dl=pexels-kuldeep-7471612.jpg&fm=jpg'); */
+`;
+
+const BackgroundImage = styled.img`
+  height: 55%;
+  width: 50%;
+  object-fit: cover;
 `;
 
 const CardDealer = styled.img``;
@@ -82,7 +93,7 @@ const CardPlayer = styled.img``;
 const CardPlayerName = styled.h3``;
 
 const Result = keyframes`
-  100% { transform: scale(6.00); }
+  /* 100% { transform: scale(6.00); } */
 `;
 
 const CardWinner = styled.h1`
